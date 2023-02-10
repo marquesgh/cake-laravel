@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cake;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CakeResource;
+use App\Http\Repositories\CakeRepository;
 use App\Http\Requests\StoreCakeRequest;
 use App\Http\Requests\UpdateCakeRequest;
-use App\Models\Cake;
 
 class CakeController extends Controller
 {
+    /**
+     * @var CakeRepository
+     */
+    private $cakeRepository;
+
+    /**
+     * CakeController constructor.
+     *
+     * @param CakeRepository $cakeRepository
+     */
+    public function __construct(CakeRepository $cakeRepository)
+    {
+        $this->cakeRepository = $cakeRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +36,6 @@ class CakeController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +45,12 @@ class CakeController extends Controller
      */
     public function store(StoreCakeRequest $request)
     {
-        return response()->json(['test' => 'test']);
+        try {
+            $cake = $this->cakeRepository->create($request->all());
+            return new CakeResource($cake);
+        } catch (Throwable $exception) {
+            return $this->sendServerError($exception, __CLASS__, __FUNCTION__);
+        }
     }
 
     /**

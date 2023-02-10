@@ -11,6 +11,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class StoreCakeRequestTest extends TestCase
 {
     use WithFaker, DatabaseTransactions;
+
+    /**
+     * @var
+     */
     protected $formRequest;
 
     /**

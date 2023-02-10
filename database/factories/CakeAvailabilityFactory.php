@@ -17,7 +17,7 @@ class CakeAvailabilityFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'available' => fake()->boolean(),
         ];
     }
 }

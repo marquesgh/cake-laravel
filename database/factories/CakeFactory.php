@@ -17,7 +17,9 @@ class CakeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'weight' => fake()->numberBetween(0, 1000),
+            'value' => fake()->randomFloat(2, 0, 100),
         ];
     }
 }

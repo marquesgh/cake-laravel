@@ -36,7 +36,7 @@ class CakeController extends Controller
      */
     public function store(StoreCakeRequest $request)
     {
-        //
+        return response()->json(['test' => 'test']);
     }
 
     /**

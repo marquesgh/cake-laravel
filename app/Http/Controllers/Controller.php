@@ -9,6 +9,22 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Cake API",
+ *      description="A simple API for managing cakes",
+ *      @OA\Contact(
+ *          email="contact@test.com"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
+ *     )
+ * )
+ *
+ */
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -27,7 +43,7 @@ class Controller extends BaseController
         $error = [
             'error' => trans('common.bad_request')
         ];
-        $statusCode = Response::HTTP_BAD_REQUEST;
+        $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         return response()->json($error, $statusCode);
     }
 }

@@ -29,7 +29,27 @@ class CakeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/cakes",
+     *      tags={"Cakes"},
+     *      summary="Get list of all cakes",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/CakeResource")
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      ),
+     * )
+     *
+     * @return CakeResource
+     * @throws Throwable
      */
     public function index()
     {
@@ -40,8 +60,62 @@ class CakeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCakeRequest  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *      path="/cakes",
+     *      tags={"Cakes"},
+     *      summary="Create a new cake",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *               @OA\Schema(
+     *                  schema="Cake",
+     *                  type="object",
+     *                  title="Cake Model",
+     *                  required={"name", "weight", "value", "quantity"},
+     *                  @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      description="Name of the cake"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="weight",
+     *                      type="integer",
+     *                      description="Weight of the cake in grammes"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="value",
+     *                      type="number",
+     *                      format="double",
+     *                      description="Value of the cake in monetary units"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="quantity",
+     *                      type="number",
+     *                      format="integer",
+     *                      description="The available quantity"
+     *                  )
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/CakeResource")
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      ),
+     * )
+     *
+     * @param StoreCakeRequest
+     * @return CakeResource
+     * @throws Throwable
      */
     public function store(StoreCakeRequest $request)
     {
@@ -56,8 +130,39 @@ class CakeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cake  $cake
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/cakes/{id}",
+     *      operationId="getCake",
+     *      tags={"Cakes"},
+     *      summary="Get a cake",
+     *      description="Gets a cake by ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Cake id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/CakeResource")
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      ),
+     * )
+     *
+     * @param CakeIdRequest
+     * @return CakeResource
+     * @throws Throwable
      */
     public function show(Cake $cake)
     {
@@ -65,24 +170,73 @@ class CakeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cake  $cake
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cake $cake)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCakeRequest  $request
-     * @param  \App\Models\Cake  $cake
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *      path="/cakes",
+     *      operationId="updateCake",
+     *      tags={"Cakes"},
+     *      summary="Update a cake",
+     *      description="Returns updated cake data",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *               @OA\Schema(
+     *                  schema="Cake",
+     *                  type="object",
+     *                  title="Cake Model",
+     *                  required={"id", "name", "weight", "value", "quantity"},
+     *                  @OA\Property(
+     *                      property="id",
+     *                      type="number",
+     *                      description="ID of the cake"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      description="Name of the cake"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="weight",
+     *                      type="integer",
+     *                      description="Weight of the cake in grammes"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="value",
+     *                      type="number",
+     *                      format="double",
+     *                      description="Value of the cake in monetary units"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="quantity",
+     *                      type="number",
+     *                      format="integer",
+     *                      description="The available quantity"
+     *                  )
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/CakeResource")
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      ),
+     * )
+     *
+     * @param StoreCakeRequest
+     * @return CakeResource
+     * @throws Throwable
      */
-    public function update(UpdateCakeRequest $request, Cake $cake)
+    public function update(StoreCakeRequest $request)
     {
         //
     }
@@ -90,8 +244,38 @@ class CakeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cake  $cake
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/cakes/{id}",
+     *      operationId="deleteCake",
+     *      tags={"Cakes"},
+     *      summary="Delete a cake",
+     *      description="Deletes a cake by ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Cake id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      ),
+     * )
+     *
+     * @param CakeIdRequest
+     * @return CakeResource
+     * @throws Throwable
      */
     public function destroy(Cake $cake)
     {

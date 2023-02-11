@@ -1,0 +1,309 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cake API",
+        "description": "A simple API for managing cakes",
+        "contact": {
+            "email": "contact@test.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/cakes": {
+            "get": {
+                "tags": [
+                    "Cakes"
+                ],
+                "summary": "Get list of all cakes",
+                "description": "Display a listing of the resource.",
+                "operationId": "37d8525219144abb010e7d5439287a53",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CakeResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cakes"
+                ],
+                "summary": "Update a cake",
+                "description": "Returns updated cake data",
+                "operationId": "updateCake",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "schema": "Cake",
+                                "title": "Cake Model",
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "weight",
+                                    "value",
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "ID of the cake",
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "description": "Name of the cake",
+                                        "type": "string"
+                                    },
+                                    "weight": {
+                                        "description": "Weight of the cake in grammes",
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "description": "Value of the cake in monetary units",
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "quantity": {
+                                        "description": "The available quantity",
+                                        "type": "number",
+                                        "format": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CakeResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cakes"
+                ],
+                "summary": "Create a new cake",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "7344fa53b39e2177119abf80d6280e3f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "schema": "Cake",
+                                "title": "Cake Model",
+                                "required": [
+                                    "name",
+                                    "weight",
+                                    "value",
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the cake",
+                                        "type": "string"
+                                    },
+                                    "weight": {
+                                        "description": "Weight of the cake in grammes",
+                                        "type": "integer"
+                                    },
+                                    "value": {
+                                        "description": "Value of the cake in monetary units",
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "quantity": {
+                                        "description": "The available quantity",
+                                        "type": "number",
+                                        "format": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CakeResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/cakes/{id}": {
+            "get": {
+                "tags": [
+                    "Cakes"
+                ],
+                "summary": "Get a cake",
+                "description": "Gets a cake by ID",
+                "operationId": "getCake",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Cake id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CakeResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cakes"
+                ],
+                "summary": "Delete a cake",
+                "description": "Deletes a cake by ID",
+                "operationId": "deleteCake",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Cake id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CakeResource": {
+                "title": "CakeResource",
+                "description": "Returns cake",
+                "type": "object",
+                "oneOf": [
+                    {
+                        "schema": "Cake",
+                        "title": "Cake",
+                        "required": [
+                            "data"
+                        ],
+                        "properties": {
+                            "data": {
+                                "description": "Cake",
+                                "type": "array",
+                                "format": "array",
+                                "items": {
+                                    "properties": {
+                                        "cake_id": {
+                                            "description": "The cake's ID",
+                                            "type": "number",
+                                            "format": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "description": "The name of the cake",
+                                            "type": "string",
+                                            "format": "string",
+                                            "example": "Cake 1"
+                                        },
+                                        "weight": {
+                                            "description": "The weight of the cake",
+                                            "type": "number",
+                                            "format": "integer",
+                                            "example": "200"
+                                        },
+                                        "value": {
+                                            "description": "The value of the cake",
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "Varejo"
+                                        },
+                                        "quantity": {
+                                            "description": "The available quantity",
+                                            "type": "number",
+                                            "format": "integer",
+                                            "example": "250"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            }
+        }
+    }
+}

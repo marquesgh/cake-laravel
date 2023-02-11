@@ -19,6 +19,7 @@ class CakeResource extends JsonResource
             'name' => $this->name,
             'weight' => $this->weight,
             'value' => $this->value,
+            'quantity' => $this->quantity,
         ];
     }
 }

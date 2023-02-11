@@ -20,6 +20,7 @@ class StoreCakeRequest extends BaseRequest
             'name' => ['required', 'string', 'max:' . Cake::$nameMaxLength],
             'weight' => ['required', 'numeric', 'integer', 'min:0'],
             'value' => ['required', 'numeric', 'min:0'],
+            'quantity' => ['required', 'numeric', 'integer', 'min:0'],
         ];
     }
 
@@ -42,6 +43,10 @@ class StoreCakeRequest extends BaseRequest
             'value.required' => trans('validation.validation_required'),
             'value.numeric' => trans('validation.validation_numeric'),
             'value.min' => trans('validation.validation_min_number'),
+            'quantity.required' => trans('validation.validation_required'),
+            'quantity.numeric' => trans('validation.validation_numeric'),
+            'quantity.min' => trans('validation.validation_min_number'),
+            'quantity.integer' => trans('validation.validation_integer'),
         ];
     }
 }

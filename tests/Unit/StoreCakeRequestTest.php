@@ -75,6 +75,9 @@ class StoreCakeRequestTest extends TestCase
         $this->assertEquals(trans('validation.validation_required', [
             'attribute' => 'value'
         ]), $validator->messages()->first('value'));
+        $this->assertEquals(trans('validation.validation_required', [
+            'attribute' => 'quantity'
+        ]), $validator->messages()->first('quantity'));
     }
 
     /**
@@ -111,11 +114,12 @@ class StoreCakeRequestTest extends TestCase
      */
     public function test_numeric_validation(): void
     {
-        //Set data with invalid weight and value
+        //Set data with invalid weight, value and quantity
         $cake = Cake::factory(
             [
                 'weight' => '10,5',
-                'value' => '10,5'
+                'value' => '10,5',
+                'quantity' => '10,5'
             ]
         )->make();
 
@@ -132,6 +136,9 @@ class StoreCakeRequestTest extends TestCase
         $this->assertEquals(trans('validation.validation_numeric', [
             'attribute' => 'value'
         ]), $validator->messages()->first('value'));
+        $this->assertEquals(trans('validation.validation_numeric', [
+            'attribute' => 'quantity'
+        ]), $validator->messages()->first('quantity'));
     }
 
     /**
@@ -141,11 +148,12 @@ class StoreCakeRequestTest extends TestCase
      */
     public function test_min_validation(): void
     {
-        //Set data with invalid weight and value
+        //Set data with invalid weight, value and quantity
         $cake = Cake::factory(
             [
                 'weight' => -1,
-                'value' => -1
+                'value' => -1,
+                'quantity' => -1
             ]
         )->make();
 
@@ -164,6 +172,10 @@ class StoreCakeRequestTest extends TestCase
             'attribute' => 'value',
             'min' => 0
         ]), $validator->messages()->first('value'));
+        $this->assertEquals(trans('validation.validation_min_number', [
+            'attribute' => 'quantity',
+            'min' => 0
+        ]), $validator->messages()->first('quantity'));
     }
 
     /**
@@ -173,10 +185,11 @@ class StoreCakeRequestTest extends TestCase
      */
     public function test_integer_validation(): void
     {
-        //Set data with invalid weight
+        //Set data with invalid weight and quantity
         $cake = Cake::factory(
             [
                 'weight' => fake()->randomFloat(2, 0, 100),
+                'quantity' => fake()->randomFloat(2, 0, 100),
             ]
         )->make();
 
@@ -190,5 +203,8 @@ class StoreCakeRequestTest extends TestCase
         $this->assertEquals(trans('validation.validation_integer', [
             'attribute' => 'weight',
         ]), $validator->messages()->first('weight'));
+        $this->assertEquals(trans('validation.validation_integer', [
+            'attribute' => 'quantity',
+        ]), $validator->messages()->first('quantity'));
     }
 }

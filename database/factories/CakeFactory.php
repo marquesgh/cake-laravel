@@ -20,6 +20,7 @@ class CakeFactory extends Factory
             'name' => fake()->name(),
             'weight' => fake()->numberBetween(0, 1000),
             'value' => fake()->randomFloat(2, 0, 100),
+            'quantity' => fake()->numberBetween(0, 1000),
         ];
     }
 }

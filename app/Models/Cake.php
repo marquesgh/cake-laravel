@@ -19,7 +19,8 @@ class Cake extends Model
     protected $fillable = [
         'name',
         'weight',
-        'value'
+        'value',
+        'quantity'
     ];
 
     /**

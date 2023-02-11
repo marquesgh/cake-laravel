@@ -35,6 +35,7 @@ class CakeTest extends TestCase
                 'name' => $cake->name,
                 'weight' => $cake->weight,
                 'value' => $cake->value,
+                'quantity' => $cake->quantity,
             ],
         ]);
 
@@ -44,6 +45,7 @@ class CakeTest extends TestCase
             'name' => $response['data']['name'],
             'weight' => $response['data']['weight'],
             'value' => $response['data']['value'],
+            'quantity' => $response['data']['quantity'],
         ]);
     }
 }

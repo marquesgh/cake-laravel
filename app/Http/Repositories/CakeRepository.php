@@ -3,9 +3,20 @@
 namespace App\Http\Repositories;
 
 use App\Models\Cake;
+use Illuminate\Database\Eloquent\Collection;
 
 class CakeRepository
 {
+    /**
+     * Get all cakes
+     *
+     * @return Cake[]
+     */
+    public function getAll(): Collection
+    {
+        return Cake::all();
+    }
+
     /**
      * Create a new cake
      *

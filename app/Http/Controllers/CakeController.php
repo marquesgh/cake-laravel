@@ -53,7 +53,12 @@ class CakeController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $cakes = $this->cakeRepository->getAll();
+            return CakeResource::collection($cakes);
+        } catch (Throwable $exception) {
+            return $this->sendServerError($exception, __CLASS__, __FUNCTION__);
+        }
     }
 
 

@@ -11,6 +11,47 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CakeTest extends TestCase
 {
     /**
+     * Index test.
+     *
+     * @return void
+     */
+    public function test_index_returns_a_successful_response()
+    {
+        //Setup test
+        $route = 'api/cakes';
+        $quantity = 2;
+        $cakes = Cake::factory()->count($quantity)->create();
+
+        //Create response
+        $response = $this->get(
+            $route,
+            []
+        );
+
+        //Assert response
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonCount($quantity, 'data');
+        $response->assertJson([
+            'data' => [
+                [
+                    'id' => $cakes[0]->id,
+                    'name' => $cakes[0]->name,
+                    'weight' => $cakes[0]->weight,
+                    'value' => $cakes[0]->value,
+                    'quantity' => $cakes[0]->quantity,
+                ],
+                [
+                    'id' => $cakes[1]->id,
+                    'name' => $cakes[1]->name,
+                    'weight' => $cakes[1]->weight,
+                    'value' => $cakes[1]->value,
+                    'quantity' => $cakes[1]->quantity
+                ]
+            ],
+        ]);
+    }
+
+    /**
      * Store test.
      *
      * @return void

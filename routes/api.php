@@ -45,3 +45,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/cakes', [CakeController::class, 'store'])->name('api.cake.create');
+Route::get('/cakes', [CakeController::class, 'index'])->name('api.cake.index');

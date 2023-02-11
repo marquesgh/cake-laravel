@@ -6,10 +6,12 @@ use Tests\TestCase;
 use App\Models\Cake;
 use Illuminate\Http\Response;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CakeTest extends TestCase
 {
+    use WithFaker, DatabaseTransactions;
+
     /**
      * Index test.
      *

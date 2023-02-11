@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CakeIdRequest;
 use App\Http\Resources\CakeResource;
-use App\Http\Repositories\CakeRepository;
 use App\Http\Requests\StoreCakeRequest;
 use App\Http\Requests\UpdateCakeRequest;
+use App\Http\Repositories\CakeRepository;
 
 class CakeController extends Controller
 {
@@ -169,9 +170,9 @@ class CakeController extends Controller
      * @return CakeResource
      * @throws Throwable
      */
-    public function show(Cake $cake)
+    public function show(CakeIdRequest $request, Cake $cake)
     {
-        //
+        dd($cake);
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Cake;
 use App\Http\Requests\BaseRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCakeRequest extends BaseRequest
 {

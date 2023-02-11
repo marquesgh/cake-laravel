@@ -47,5 +47,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/cakes', [CakeController::class, 'store'])->name('api.cake.create');
 Route::get('/cakes', [CakeController::class, 'index'])->name('api.cake.index');
 Route::get('/cakes/{cake_id}', [CakeController::class, 'show'])->name('api.cake.show');
-Route::put('/cakes', [CakeController::class, 'update'])->name('api.cake.update');
+Route::put('/cakes/{cake_id}', [CakeController::class, 'update'])->name('api.cake.update');
 Route::delete('/cakes/{cake_id}', [CakeController::class, 'destroy'])->name('api.cake.destroy');

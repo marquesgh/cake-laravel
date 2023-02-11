@@ -4,9 +4,25 @@ namespace App\Http\Requests;
 
 use App\Models\Cake;
 use App\Http\Requests\BaseRequest;
+use Illuminate\Support\Facades\Route;
 
 class StoreCakeRequest extends BaseRequest
 {
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $cakeId = Route::getCurrentRoute()->cake_id;
+        if ($cakeId) {
+            $this->merge([
+                'cake_id' => $cakeId,
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

@@ -170,9 +170,14 @@ class CakeController extends Controller
      * @return CakeResource
      * @throws Throwable
      */
-    public function show(CakeIdRequest $request, Cake $cake)
+    public function show(CakeIdRequest $request)
     {
-        dd($cake);
+        try {
+            $cake = $this->cakeRepository->getById($request->cake_id);
+            return new CakeResource($cake);
+        } catch (Throwable $exception) {
+            return $this->sendServerError($exception, __CLASS__, __FUNCTION__);
+        }
     }
 
     /**
@@ -242,9 +247,14 @@ class CakeController extends Controller
      * @return CakeResource
      * @throws Throwable
      */
-    public function update(StoreCakeRequest $request)
+    public function update(StoreCakeRequest $request, int $cakeId)
     {
-        //
+        try {
+            $cake = $this->cakeRepository->update($cakeId, $request->except('cake_id'));
+            return new CakeResource($cake);
+        } catch (Throwable $exception) {
+            return $this->sendServerError($exception, __CLASS__, __FUNCTION__);
+        }
     }
 
     /**
@@ -283,8 +293,13 @@ class CakeController extends Controller
      * @return CakeResource
      * @throws Throwable
      */
-    public function destroy(Cake $cake)
+    public function destroy(CakeIdRequest $request)
     {
-        //
+        try {
+            $this->cakeRepository->delete($request->cake_id);
+            return response()->json(null, 204);
+        } catch (Throwable $exception) {
+            return $this->sendServerError($exception, __CLASS__, __FUNCTION__);
+        }
     }
 }

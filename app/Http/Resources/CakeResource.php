@@ -80,7 +80,7 @@ class CakeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'weight' => $this->weight,
-            'value' => $this->value,
+            'value' => currencyFormat($this->value),
             'quantity' => $this->quantity,
         ];
     }

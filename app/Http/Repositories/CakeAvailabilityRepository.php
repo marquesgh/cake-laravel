@@ -3,6 +3,9 @@
 namespace App\Http\Repositories;
 
 use App\Models\CakeAvailability;
+use App\Events\CakeAvailabilityCreated;
+use App\Http\Repositories\CakeRepository;
+use App\Http\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class CakeAvailabilityRepository
@@ -32,6 +35,7 @@ class CakeAvailabilityRepository
             if ($quantity > 0) {
                 $cakeAvailability->available = true;
                 $quantity--;
+                event(new CakeAvailabilityCreated($cakeAvailability));
             } else {
                 $cakeAvailability->available = false;
             }

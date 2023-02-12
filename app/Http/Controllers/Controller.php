@@ -30,6 +30,20 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
+     * Send server response
+     *
+     * @param array
+     * @return Response
+     */
+    public function sendServerResponse(array|string $response)
+    {
+        $data = [
+            'data' => $response
+        ];
+        return response()->json($data, Response::HTTP_OK);
+    }
+
+    /**
      * Send server error
      *
      * @param Throwable, string, string

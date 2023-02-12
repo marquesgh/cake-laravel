@@ -12,7 +12,7 @@ class CakeIdRequest extends BaseRequest
      *
      * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'cake_id' => Route::getCurrentRoute()->cake_id,
@@ -24,7 +24,7 @@ class CakeIdRequest extends BaseRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'cake_id' => ['required', 'exists:cakes,id'],

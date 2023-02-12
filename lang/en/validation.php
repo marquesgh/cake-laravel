@@ -177,6 +177,8 @@ return [
     'validation_numeric' => 'The :attribute must be a number.',
     'validation_min_number' => 'The :attribute must be at least :min.',
     'validation_integer' => 'The :attribute must be an integer.',
+    'validation_array' => 'The :attribute must be an array.',
+    'validation_array_exists' => 'One of the list items is invalid.',
 
     /*
     |--------------------------------------------------------------------------
@@ -195,7 +197,8 @@ return [
         'name' => 'name',
         'weight' => 'weight',
         'value' => 'value',
-        'available' => 'available'
+        'available' => 'available',
+        'users_id' => 'user list'
     ],
 
 ];

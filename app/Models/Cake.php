@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cake extends Model
 {
@@ -43,4 +44,14 @@ class Cake extends Model
      * @var array
      */
     protected $dates = ['created_at', 'updated_at'];
+
+    /**
+     * Finds rows in the CakeAvailability table associated with 'cake_id'
+     *
+     * @return CakeAvailability object
+     */
+    public function cakeAvailabilities(): HasMany
+    {
+        return $this->hasMany(CakeAvailability::class, 'cake_id');
+    }
 }

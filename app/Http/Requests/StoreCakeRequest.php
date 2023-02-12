@@ -13,7 +13,7 @@ class StoreCakeRequest extends BaseRequest
      *
      * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $cakeId = Route::getCurrentRoute()->cake_id;
         if ($cakeId) {
